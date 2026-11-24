@@ -1,18 +1,22 @@
 import { Check, Copy } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 import { useCopyToClipboard } from '../../hooks/useCopyToClipboard';
+import { getUIStrings } from '../../services/portfolioService';
 
 interface CopyEmailButtonProps {
   email: string;
 }
 
 export function CopyEmailButton({ email }: CopyEmailButtonProps) {
+  const { lang } = useLanguage();
+  const ui = getUIStrings(lang);
   const { copied, copy } = useCopyToClipboard();
 
   return (
     <button
       type="button"
       onClick={() => void copy(email)}
-      aria-label={copied ? `Copied ${email} to clipboard` : `Copy email address ${email}`}
+      aria-label={copied ? `${ui.copied}: ${email}` : `${ui.copy}: ${email}`}
       className={`group flex w-full cursor-pointer items-center justify-between gap-3 rounded-lg border px-3.5 py-2.5 text-left transition-colors duration-200 ${
         copied
           ? 'border-[var(--accent-emerald)] bg-[rgba(16,185,129,0.08)]'
@@ -34,12 +38,12 @@ export function CopyEmailButton({ email }: CopyEmailButtonProps) {
         {copied ? (
           <>
             <Check className="h-3.5 w-3.5 stroke-[1.75]" aria-hidden="true" />
-            <span>Copied</span>
+            <span>{ui.copied}</span>
           </>
         ) : (
           <>
             <Copy className="h-3.5 w-3.5 stroke-[1.5]" aria-hidden="true" />
-            <span>Copy</span>
+            <span>{ui.copy}</span>
           </>
         )}
       </span>

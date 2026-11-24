@@ -1,3 +1,33 @@
+export type Language = 'en' | 'tr';
+
+export interface UIStrings {
+  scroll: string;
+  index: string;
+  returnToTop: string;
+  returnToIndex: string;
+  visitLive: string;
+  statusLabel: string;
+  platformLabel: string;
+  statusAll: string;
+  statusReleased: string;
+  statusInProgress: string;
+  platformAll: string;
+  downloadGithub: string;
+  noReleasesYet: string;
+  emptyApps: string;
+  resetFilters: string;
+  focusStack: string;
+  location: string;
+  email: string;
+  socials: string;
+  copy: string;
+  copied: string;
+  openPdf: string;
+  download: string;
+  sectionsAriaLabel: string;
+  contactAriaLabel: string;
+}
+
 export type SheetRouteId = 'websites' | 'apps' | 'about' | 'cv';
 export type AppPlatform = 'macOS' | 'Windows' | 'Web' | 'Mobile';
 export type AppStatus = 'Released' | 'In Progress';

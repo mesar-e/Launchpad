@@ -6,6 +6,8 @@ import {
   useScroll,
   useTransform,
 } from 'motion/react';
+import { useLanguage } from '../../context/LanguageContext';
+import { getUIStrings } from '../../services/portfolioService';
 import { TopNavbar } from '../layout/TopNavbar';
 import { AmbientCursorGlow } from './AmbientCursorGlow';
 
@@ -29,6 +31,8 @@ export function ScrollStage({
   onResetScroll,
   children,
 }: ScrollStageProps) {
+  const { lang } = useLanguage();
+  const ui = getUIStrings(lang);
   const stageRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const heroSlotRef = useRef<HTMLDivElement>(null);
@@ -162,6 +166,7 @@ export function ScrollStage({
         borderOpacity={navbarBorderOpacity}
         isAct2={isAct2}
         activeRouteLabel={activeRouteLabel}
+        returnToTopLabel={ui.returnToTop}
         onNameClick={onResetScroll}
       />
 
@@ -219,7 +224,7 @@ export function ScrollStage({
           style={{ opacity: scrollCueOpacity, y: scrollCueY }}
           className="pointer-events-none absolute inset-x-0 bottom-8 z-20 flex flex-col items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-muted)] sm:bottom-10"
         >
-          <span>Scroll</span>
+          <span>{ui.scroll}</span>
           <span className="h-5 w-px bg-current opacity-35" />
         </motion.div>
 

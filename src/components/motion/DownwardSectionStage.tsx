@@ -1,6 +1,8 @@
 import { useId, type ReactNode, type RefObject } from 'react';
 import { ArrowUp } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 import type { SheetRouteMeta } from '../../lib/routes';
+import { getUIStrings } from '../../services/portfolioService';
 import { SectionBackdrop } from '../backgrounds/SectionBackdrop';
 
 interface DownwardSectionStageProps {
@@ -16,6 +18,8 @@ export function DownwardSectionStage({
   onReturnToIndex,
   children,
 }: DownwardSectionStageProps) {
+  const { lang } = useLanguage();
+  const ui = getUIStrings(lang);
   const headingId = useId();
 
   if (!route) {
@@ -55,11 +59,11 @@ export function DownwardSectionStage({
         <button
           type="button"
           onClick={onReturnToIndex}
-          aria-label="Return to Act 2 index"
+          aria-label={ui.returnToIndex}
           className="pointer-events-auto inline-flex cursor-pointer items-center gap-2 rounded-full border border-[var(--border-dark-hairline)] bg-[rgba(15,20,18,0.88)] px-4 py-2 font-mono text-xs tracking-wider text-[var(--ink-dark-primary)] shadow-lg backdrop-blur-md transition-colors duration-200 hover:border-[var(--accent-emerald)] hover:text-[var(--accent-emerald)]"
         >
           <ArrowUp className="h-3.5 w-3.5 stroke-[1.5]" aria-hidden="true" />
-          <span>Index</span>
+          <span>{ui.index}</span>
         </button>
       </div>
     </section>

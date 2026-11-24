@@ -1,8 +1,11 @@
 import { ArrowUpRight, Download } from 'lucide-react';
-import { getCVDocuments } from '../../services/portfolioService';
+import { useLanguage } from '../../context/LanguageContext';
+import { getCVDocuments, getUIStrings } from '../../services/portfolioService';
 
 export function CvSection() {
-  const documents = getCVDocuments();
+  const { lang } = useLanguage();
+  const documents = getCVDocuments(lang);
+  const ui = getUIStrings(lang);
 
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -43,7 +46,7 @@ export function CvSection() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 font-mono text-xs text-[var(--ink-dark-primary)] transition-colors duration-200 after:absolute after:inset-0 group-hover:text-[var(--accent-emerald)]"
             >
-              <span>Open PDF</span>
+              <span>{ui.openPdf}</span>
               <ArrowUpRight className="h-3.5 w-3.5 stroke-[1.5]" aria-hidden="true" />
             </a>
 
@@ -52,7 +55,7 @@ export function CvSection() {
               download={doc.fileName}
               className="relative z-10 inline-flex items-center gap-1.5 rounded-full border border-[var(--border-dark-hairline)] px-3 py-1 font-mono text-xs text-[var(--ink-dark-muted)] transition-colors duration-200 hover:border-[var(--accent-emerald)] hover:text-[var(--accent-emerald)]"
             >
-              <span>Download</span>
+              <span>{ui.download}</span>
               <Download className="h-3.5 w-3.5 stroke-[1.5]" aria-hidden="true" />
             </a>
           </div>

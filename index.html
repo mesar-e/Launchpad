@@ -3,24 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="light dark" />
-    <script>
-      (function () {
-        try {
-          var stored = localStorage.getItem('launchpad-theme');
-          var meta = document.querySelector('meta[name="color-scheme"]');
-          if (stored === 'light' || stored === 'dark') {
-            if (meta) meta.setAttribute('content', stored);
-            document.documentElement.setAttribute('data-theme', stored);
-          } else {
-            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-          }
-        } catch {
-          /* Ignore storage access errors in restricted environments */
-        }
-      })();
-    </script>
+    <meta name="color-scheme" content="dark" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -1,9 +1,16 @@
 import { useState } from 'react';
 import { ArrowUpRight, Github } from 'lucide-react';
-import { getWebsites } from '../../services/portfolioService';
+import { useLanguage } from '../../context/LanguageContext';
+import { getUIStrings, getWebsites } from '../../services/portfolioService';
 import type { WebsiteProject } from '../../types/portfolio';
 
-function WebsiteCard({ project }: { project: WebsiteProject }) {
+function WebsiteCard({
+  project,
+  visitLiveLabel,
+}: {
+  project: WebsiteProject;
+  visitLiveLabel: string;
+}) {
   const [imgError, setImgError] = useState(false);
   const showImage = Boolean(project.previewImage) && !imgError;
 
@@ -42,13 +49,13 @@ function WebsiteCard({ project }: { project: WebsiteProject }) {
         href={project.liveUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`Visit ${project.title} live website`}
+        aria-label={`${project.title} — ${visitLiveLabel}`}
         className="group relative block aspect-[16/10] w-full overflow-hidden bg-[var(--surface-dark-canvas)]"
       >
         {showImage ? (
           <img
             src={project.previewImage}
-            alt={`${project.title} live preview`}
+            alt={`${project.title} preview`}
             loading="lazy"
             onError={() => setImgError(true)}
             className="h-full w-full object-cover object-top transition-transform duration-300 ease-out group-hover:scale-[1.03]"
@@ -66,7 +73,7 @@ function WebsiteCard({ project }: { project: WebsiteProject }) {
         )}
 
         <span className="pointer-events-none absolute right-3 bottom-3 inline-flex items-center gap-1.5 rounded-full border border-[var(--border-dark-hairline)] bg-[rgba(15,20,18,0.88)] px-3 py-1.5 font-mono text-[11px] text-[var(--ink-dark-primary)] backdrop-blur-md transition-colors duration-200 group-hover:border-[var(--accent-emerald)] group-hover:text-[var(--accent-emerald)]">
-          <span>Visit Live</span>
+          <span>{visitLiveLabel}</span>
           <ArrowUpRight className="h-3 w-3 stroke-[1.75]" aria-hidden="true" />
         </span>
       </a>
@@ -76,7 +83,7 @@ function WebsiteCard({ project }: { project: WebsiteProject }) {
           {project.description}
         </p>
 
-        <ul className="flex flex-wrap gap-1.5" aria-label={`${project.title} technologies`}>
+        <ul className="flex flex-wrap gap-1.5" aria-label={project.title}>
           {project.tags.map((tag) => (
             <li
               key={tag}
@@ -92,12 +99,18 @@ function WebsiteCard({ project }: { project: WebsiteProject }) {
 }
 
 export function WebsitesSection() {
-  const websites = getWebsites();
+  const { lang } = useLanguage();
+  const websites = getWebsites(lang);
+  const ui = getUIStrings(lang);
 
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
       {websites.map((project) => (
-        <WebsiteCard key={project.id} project={project} />
+        <WebsiteCard
+          key={project.id}
+          project={project}
+          visitLiveLabel={ui.visitLive}
+        />
       ))}
     </div>
   );

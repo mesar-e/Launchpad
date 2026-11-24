@@ -1,9 +1,12 @@
 import { ArrowUpRight, MapPin } from 'lucide-react';
-import { getProfile } from '../../services/portfolioService';
+import { useLanguage } from '../../context/LanguageContext';
+import { getProfile, getUIStrings } from '../../services/portfolioService';
 import { CopyEmailButton } from '../ui/CopyEmailButton';
 
 export function AboutSection() {
-  const profile = getProfile();
+  const { lang } = useLanguage();
+  const profile = getProfile(lang);
+  const ui = getUIStrings(lang);
 
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.35fr_1fr]">
@@ -25,7 +28,7 @@ export function AboutSection() {
 
         <div className="space-y-3">
           <h3 className="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--ink-dark-muted)]">
-            Focus &amp; Stack
+            {ui.focusStack}
           </h3>
 
           <dl className="divide-y divide-[var(--border-dark-hairline)] border-y border-[var(--border-dark-hairline)]">
@@ -54,12 +57,12 @@ export function AboutSection() {
       </div>
 
       <aside
-        aria-label="Contact and links"
+        aria-label={ui.contactAriaLabel}
         className="flex h-fit flex-col gap-6 rounded-xl border border-[var(--border-dark-hairline)] bg-[var(--surface-dark-elevated)]/90 p-6"
       >
         <div className="space-y-1.5">
           <span className="block font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ink-dark-muted)]">
-            Location
+            {ui.location}
           </span>
           <p className="inline-flex items-center gap-2 text-sm text-[var(--ink-dark-primary)]">
             <MapPin className="h-3.5 w-3.5 stroke-[1.5] text-[var(--accent-emerald)]" aria-hidden="true" />
@@ -69,14 +72,14 @@ export function AboutSection() {
 
         <div className="space-y-2">
           <span className="block font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ink-dark-muted)]">
-            Email
+            {ui.email}
           </span>
           <CopyEmailButton email={profile.email} />
         </div>
 
         <div className="space-y-2 border-t border-[var(--border-dark-hairline)] pt-4">
           <span className="block font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ink-dark-muted)]">
-            Socials
+            {ui.socials}
           </span>
           <ul className="divide-y divide-[var(--border-dark-hairline)]">
             {profile.socials.map((social) => (

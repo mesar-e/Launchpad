@@ -5,14 +5,15 @@ import { BottomDock } from './components/layout/BottomDock';
 import { DownwardSectionStage } from './components/motion/DownwardSectionStage';
 import { ScrollStage } from './components/motion/ScrollStage';
 import { SectionRouter } from './components/sections/SectionRouter';
-import { ThemeProvider } from './context/ThemeContext';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { useActiveSheet } from './hooks/useActiveSheet';
 import { smoothScrollTo } from './lib/smoothScroll';
 import { getProfile } from './services/portfolioService';
 import type { SheetRouteId } from './types/portfolio';
 
 function PortfolioShell() {
-  const profile = getProfile();
+  const { lang } = useLanguage();
+  const profile = getProfile(lang);
   const { activeSheet, activeRoute, openSheet, closeSheet } = useActiveSheet();
   const sectionRef = useRef<HTMLElement | null>(null);
   const pendingScrollRef = useRef<'smooth' | null>(null);
@@ -105,7 +106,7 @@ function PortfolioShell() {
 export default function App() {
   return (
     <MotionConfig reducedMotion="user">
-      <ThemeProvider>
+      <LanguageProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={null} />
@@ -117,7 +118,7 @@ export default function App() {
           </Routes>
           <PortfolioShell />
         </BrowserRouter>
-      </ThemeProvider>
+      </LanguageProvider>
     </MotionConfig>
   );
 }

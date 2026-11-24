@@ -1,6 +1,6 @@
 import type { RefObject } from 'react';
 import { motion, type MotionValue } from 'motion/react';
-import { ThemeToggle } from '../ui/ThemeToggle';
+import { LanguageToggle } from '../ui/LanguageToggle';
 
 interface TopNavbarProps {
   name: string;
@@ -9,6 +9,7 @@ interface TopNavbarProps {
   borderOpacity: MotionValue<number>;
   isAct2: boolean;
   activeRouteLabel?: string;
+  returnToTopLabel: string;
   onNameClick: () => void;
 }
 
@@ -19,6 +20,7 @@ export function TopNavbar({
   borderOpacity,
   isAct2,
   activeRouteLabel,
+  returnToTopLabel,
   onNameClick,
 }: TopNavbarProps) {
   return (
@@ -55,7 +57,7 @@ export function TopNavbar({
           style={{ opacity: dockOpacity }}
           tabIndex={isAct2 ? 0 : -1}
           aria-hidden={!isAct2}
-          aria-label={`${name} — return to top`}
+          aria-label={`${name} — ${returnToTopLabel}`}
           className={`group inline-flex items-center justify-center justify-self-center py-1 text-center focus-visible:rounded-sm ${
             isAct2 ? 'pointer-events-auto cursor-pointer' : 'pointer-events-none'
           }`}
@@ -69,7 +71,7 @@ export function TopNavbar({
         </motion.button>
 
         <div className="flex items-center justify-self-end">
-          <ThemeToggle />
+          <LanguageToggle />
         </div>
       </nav>
     </header>

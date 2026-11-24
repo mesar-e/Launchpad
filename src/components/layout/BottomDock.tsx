@@ -1,5 +1,7 @@
 import { ArrowDown } from 'lucide-react';
-import { SHEET_ROUTES } from '../../lib/routes';
+import { useLanguage } from '../../context/LanguageContext';
+import { getSheetRoutes } from '../../lib/routes';
+import { getUIStrings } from '../../services/portfolioService';
 import type { SheetRouteId } from '../../types/portfolio';
 
 interface BottomDockProps {
@@ -8,13 +10,17 @@ interface BottomDockProps {
 }
 
 export function BottomDock({ activeSheet, onSelectSheet }: BottomDockProps) {
+  const { lang } = useLanguage();
+  const routes = getSheetRoutes(lang);
+  const ui = getUIStrings(lang);
+
   return (
     <section
-      aria-label="Portfolio sections"
+      aria-label={ui.sectionsAriaLabel}
       className="w-full border-t border-[var(--border-dark-hairline)] bg-[rgba(15,20,18,0.65)] backdrop-blur-sm"
     >
       <ul className="mx-auto grid w-full max-w-6xl grid-cols-2 md:grid-cols-4">
-        {SHEET_ROUTES.map((route, index) => {
+        {routes.map((route, index) => {
           const isActive = activeSheet === route.id;
           const dividerClasses = [
             index < 2 ? 'border-b md:border-b-0' : '',
