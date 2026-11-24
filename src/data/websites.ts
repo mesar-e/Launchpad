@@ -3,7 +3,7 @@ import type { WebsiteProject } from '../types/portfolio';
 export const WEBSITES: readonly WebsiteProject[] = [
   {
     id: 'lfg-finder',
-    title: 'LFG Finder',
+    title: 'Match Point',
     description:
       'Glassmorphic squad-matching interface for multiplayer sessions with real-time filtering, role tags, and instant lobby discovery.',
     role: 'Design & Full-Stack Web',
