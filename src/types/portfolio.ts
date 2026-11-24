@@ -2,6 +2,11 @@ export type SheetRouteId = 'websites' | 'apps' | 'about' | 'cv';
 export type AppPlatform = 'macOS' | 'Windows' | 'Web' | 'Mobile';
 export type AppStatus = 'Released' | 'In Progress';
 
+export interface ProjectRepo {
+  label: string;
+  url: string;
+}
+
 export interface WebsiteProject {
   id: string;
   title: string;
@@ -10,9 +15,14 @@ export interface WebsiteProject {
   year: string;
   tags: string[];
   liveUrl: string;
-  repoUrl?: string;
+  repos: ProjectRepo[];
   previewImage?: string;
   featured: boolean;
+}
+
+export interface AppFilter {
+  platform?: AppPlatform | 'All';
+  status?: AppStatus | 'All';
 }
 
 export interface AppProject {
@@ -22,7 +32,7 @@ export interface AppProject {
   platform: AppPlatform;
   status: AppStatus;
   tags: string[];
-  githubUrl: string;
+  githubUrl?: string;
 }
 
 export interface SocialLink {

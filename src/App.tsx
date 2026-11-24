@@ -4,6 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { BottomDock } from './components/layout/BottomDock';
 import { DownwardSectionStage } from './components/motion/DownwardSectionStage';
 import { ScrollStage } from './components/motion/ScrollStage';
+import { SectionRouter } from './components/sections/SectionRouter';
 import { ThemeProvider } from './context/ThemeContext';
 import { useActiveSheet } from './hooks/useActiveSheet';
 import { smoothScrollTo } from './lib/smoothScroll';
@@ -100,17 +101,7 @@ function PortfolioShell() {
         sectionRef={sectionRef}
         onReturnToIndex={handleReturnToIndex}
       >
-        {activeRoute ? (
-          <div className="space-y-4">
-            <p className="font-mono text-xs uppercase tracking-[0.16em] text-[var(--ink-dark-muted)]">
-              Section {activeRoute.index} · {activeRoute.path}
-            </p>
-            <p className="max-w-2xl text-base leading-relaxed text-[var(--ink-dark-primary)]">
-              Placeholder content for <strong>{activeRoute.label}</strong>. {activeRoute.subtitle}.
-              Structured portfolio modules will populate here in Milestone 2 &amp; 3.
-            </p>
-          </div>
-        ) : null}
+        {activeRoute ? <SectionRouter route={activeRoute} /> : null}
       </DownwardSectionStage>
     </main>
   );
