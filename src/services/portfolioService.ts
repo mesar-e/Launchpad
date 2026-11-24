@@ -1,9 +1,13 @@
 import { APPS } from '../data/apps';
+import { CV_DOCUMENTS } from '../data/cv';
+import { PROFILE } from '../data/profile';
 import { WEBSITES } from '../data/websites';
 import type {
   AppFilter,
   AppPlatform,
   AppProject,
+  CVDocument,
+  ProfileInfo,
   WebsiteProject,
 } from '../types/portfolio';
 
@@ -31,4 +35,12 @@ export function getAppPlatforms(): readonly AppPlatform[] {
     seen.add(app.platform);
   }
   return Array.from(seen);
+}
+
+export function getProfile(): ProfileInfo {
+  return PROFILE;
+}
+
+export function getCVDocuments(): readonly CVDocument[] {
+  return CV_DOCUMENTS;
 }

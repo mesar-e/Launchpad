@@ -52,25 +52,14 @@ export interface ProfileInfo {
   socials: SocialLink[];
 }
 
-export interface ExperienceItem {
-  id: string;
-  role: string;
-  company: string;
-  period: string;
-  location: string;
-  highlights: string[];
-}
+export type CVLanguage = 'EN' | 'TR';
 
-export interface EducationItem {
+export interface CVDocument {
   id: string;
-  degree: string;
-  institution: string;
-  period: string;
-}
-
-export interface CVData {
-  summary: string;
-  skills: { group: string; items: string[] }[];
-  experience: ExperienceItem[];
-  education: EducationItem[];
+  language: CVLanguage;
+  label: string;
+  title: string;
+  subtitle: string;
+  pdfUrl: string;
+  fileName: string;
 }

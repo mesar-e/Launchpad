@@ -8,15 +8,11 @@ import { SectionRouter } from './components/sections/SectionRouter';
 import { ThemeProvider } from './context/ThemeContext';
 import { useActiveSheet } from './hooks/useActiveSheet';
 import { smoothScrollTo } from './lib/smoothScroll';
+import { getProfile } from './services/portfolioService';
 import type { SheetRouteId } from './types/portfolio';
 
-const PLACEHOLDER_IDENTITY = {
-  name: 'Musa Serkan Ergül',
-  tagline: 'Software engineer & interface designer crafting calm, resilient web systems.',
-  availability: 'Available for select projects',
-} as const;
-
 function PortfolioShell() {
+  const profile = getProfile();
   const { activeSheet, activeRoute, openSheet, closeSheet } = useActiveSheet();
   const sectionRef = useRef<HTMLElement | null>(null);
   const pendingScrollRef = useRef<'smooth' | null>(null);
@@ -87,9 +83,9 @@ function PortfolioShell() {
   return (
     <main>
       <ScrollStage
-        name={PLACEHOLDER_IDENTITY.name}
-        tagline={PLACEHOLDER_IDENTITY.tagline}
-        availability={PLACEHOLDER_IDENTITY.availability}
+        name={profile.name}
+        tagline={profile.tagline}
+        availability={profile.availability}
         activeRouteLabel={activeRoute?.label}
         onResetScroll={handleResetScroll}
       >
