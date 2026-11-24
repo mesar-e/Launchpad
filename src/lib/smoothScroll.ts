@@ -44,12 +44,14 @@ export function smoothScrollTo(
     }
     window.removeEventListener('wheel', cancel);
     window.removeEventListener('touchstart', cancel);
+    window.removeEventListener('touchmove', cancel);
     window.removeEventListener('pointerdown', cancel);
     window.removeEventListener('keydown', cancel);
   };
 
   window.addEventListener('wheel', cancel, { passive: true });
   window.addEventListener('touchstart', cancel, { passive: true });
+  window.addEventListener('touchmove', cancel, { passive: true });
   window.addEventListener('pointerdown', cancel, { passive: true });
   window.addEventListener('keydown', cancel);
 

@@ -31,7 +31,7 @@ export function DownwardSectionStage({
       ref={sectionRef}
       id={`section-${route.id}`}
       aria-labelledby={headingId}
-      className="relative z-20 flex min-h-dvh w-full flex-col justify-between border-t border-[var(--border-dark-hairline)] bg-[var(--surface-dark-canvas)] text-[var(--ink-dark-primary)]"
+      className="relative z-20 flex min-h-svh w-full flex-col justify-between border-t border-[var(--border-dark-hairline)] bg-[var(--surface-dark-canvas)] text-[var(--ink-dark-primary)]"
     >
       <SectionBackdrop key={route.id} routeId={route.id} />
 

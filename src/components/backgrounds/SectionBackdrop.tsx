@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { useReducedMotion } from 'motion/react';
 import type { SheetRouteId } from '../../types/portfolio';
 
@@ -11,7 +11,13 @@ interface SectionBackdropProps {
   routeId: SheetRouteId;
 }
 
-function BackdropScene({ routeId }: SectionBackdropProps) {
+function BackdropScene({
+  routeId,
+  isCoarsePointer,
+}: {
+  routeId: SheetRouteId;
+  isCoarsePointer: boolean;
+}) {
   switch (routeId) {
     case 'websites':
       return (
@@ -57,7 +63,7 @@ function BackdropScene({ routeId }: SectionBackdropProps) {
           ambient={0.38}
           opacity={0.55}
           autoAnimate
-          interactive
+          interactive={!isCoarsePointer}
           clickBurst={false}
         />
       );
@@ -70,7 +76,7 @@ function BackdropScene({ routeId }: SectionBackdropProps) {
           speed={0.55}
           glow={0.55}
           bloom={0.38}
-          mouseInteraction
+          mouseInteraction={!isCoarsePointer}
         />
       );
   }
@@ -78,6 +84,20 @@ function BackdropScene({ routeId }: SectionBackdropProps) {
 
 export function SectionBackdrop({ routeId }: SectionBackdropProps) {
   const prefersReducedMotion = useReducedMotion();
+  const [isCoarsePointer, setIsCoarsePointer] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(pointer: coarse)').matches;
+  });
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(pointer: coarse)');
+    const updatePointer = (): void => {
+      setIsCoarsePointer(mediaQuery.matches);
+    };
+    updatePointer();
+    mediaQuery.addEventListener('change', updatePointer);
+    return () => mediaQuery.removeEventListener('change', updatePointer);
+  }, []);
 
   if (prefersReducedMotion) {
     return (
@@ -91,10 +111,10 @@ export function SectionBackdrop({ routeId }: SectionBackdropProps) {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 overflow-hidden bg-[var(--surface-dark-canvas)]"
+      className="pointer-events-none absolute inset-0 overflow-hidden bg-[var(--surface-dark-canvas)] [&_canvas]:pointer-events-none [&_canvas]:touch-pan-y"
     >
       <Suspense fallback={null}>
-        <BackdropScene routeId={routeId} />
+        <BackdropScene routeId={routeId} isCoarsePointer={isCoarsePointer} />
       </Suspense>
     </div>
   );

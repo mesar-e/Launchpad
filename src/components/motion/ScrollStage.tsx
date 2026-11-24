@@ -96,11 +96,18 @@ export function ScrollStage({
 
     measure();
 
+    let lastWidth = window.innerWidth;
+    const handleResize = (): void => {
+      if (window.innerWidth === lastWidth) return;
+      lastWidth = window.innerWidth;
+      measure();
+    };
+
     const resizeObserver = new ResizeObserver(measure);
     if (stickyRef.current) resizeObserver.observe(stickyRef.current);
     if (heroSlotRef.current) resizeObserver.observe(heroSlotRef.current);
     if (dockNameRef.current) resizeObserver.observe(dockNameRef.current);
-    window.addEventListener('resize', measure);
+    window.addEventListener('resize', handleResize);
 
     let active = true;
     document.fonts?.ready.then(() => {
@@ -110,7 +117,7 @@ export function ScrollStage({
     return () => {
       active = false;
       resizeObserver.disconnect();
-      window.removeEventListener('resize', measure);
+      window.removeEventListener('resize', handleResize);
     };
   }, [name]);
 
@@ -158,7 +165,7 @@ export function ScrollStage({
   );
 
   return (
-    <div ref={stageRef} className="relative h-[200dvh] w-full">
+    <div ref={stageRef} className="relative h-[200svh] w-full">
       <TopNavbar
         name={name}
         dockNameRef={dockNameRef}
@@ -172,7 +179,7 @@ export function ScrollStage({
 
       <AmbientCursorGlow opacity={glowOpacity} />
 
-      <div ref={stickyRef} className="sticky top-0 h-dvh w-full overflow-hidden">
+      <div ref={stickyRef} className="sticky top-0 h-svh w-full overflow-hidden">
         {/* Act 2 Forest Charcoal canvas layer */}
         <motion.div
           aria-hidden="true"
