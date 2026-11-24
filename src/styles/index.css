@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+:root {
+  color-scheme: light dark;
+
+  --surface-canvas: #F4F5F2;
+  --surface-elevated: #FFFFFF;
+  --ink-primary: #121714;
+  --ink-muted: #525C56;
+  --border-hairline: rgba(18, 23, 20, 0.10);
+  --accent-emerald: #10B981;
+
+  --surface-dark-canvas: #0F1412;
+  --surface-dark-elevated: #161D1A;
+  --ink-dark-primary: #F0F2EE;
+  --ink-dark-muted: #8E9A93;
+  --border-dark-hairline: rgba(240, 242, 238, 0.10);
+
+  &:has(> head > meta[name="color-scheme"][content="dark"]) {
+    color-scheme: dark;
+  }
+
+  &:has(> head > meta[name="color-scheme"][content="light"]) {
+    color-scheme: light;
+  }
+}
+
+[data-theme="dark"] {
+  --surface-canvas: #0F1412;
+  --surface-elevated: #161D1A;
+  --ink-primary: #F0F2EE;
+  --ink-muted: #8E9A93;
+  --border-hairline: rgba(240, 242, 238, 0.10);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: var(--surface-canvas);
+    color: var(--ink-primary);
+    scrollbar-gutter: stable;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background-color: var(--surface-canvas);
+    color: var(--ink-primary);
+  }
+
+  ::selection {
+    background-color: rgba(16, 185, 129, 0.22);
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-emerald);
+    outline-offset: 3px;
+  }
+}
+
+dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
