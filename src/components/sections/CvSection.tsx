@@ -28,7 +28,6 @@ export function CvSection() {
           </div>
 
           <div className="my-6 space-y-2">
-            <p className="font-mono text-xs text-[var(--ink-dark-muted)]">{doc.label}</p>
             <h3 className="text-2xl font-medium tracking-[-0.025em] text-[var(--ink-dark-primary)] sm:text-3xl">
               {doc.title}
             </h3>

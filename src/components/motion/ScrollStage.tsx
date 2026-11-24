@@ -12,7 +12,6 @@ import { AmbientCursorGlow } from './AmbientCursorGlow';
 interface ScrollStageProps {
   name: string;
   tagline: string;
-  availability: string;
   activeRouteLabel?: string;
   onResetScroll: () => void;
   children?: ReactNode;
@@ -26,7 +25,6 @@ interface MorphMetrics {
 export function ScrollStage({
   name,
   tagline,
-  availability,
   activeRouteLabel,
   onResetScroll,
   children,
@@ -179,15 +177,6 @@ export function ScrollStage({
 
         {/* Act 1 Centered Hero Typography */}
         <div className="pointer-events-none absolute inset-0 z-20 flex flex-col items-center justify-center px-6">
-          <motion.div
-            style={{ opacity: heroMetaOpacity, y: heroMetaY }}
-            aria-hidden={!showHeroMeta}
-            className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--border-hairline)] bg-[var(--surface-elevated)]/70 px-3.5 py-1 text-xs font-medium tracking-tight text-[var(--ink-muted)] backdrop-blur-sm"
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-emerald)]" aria-hidden="true" />
-            <span>{availability}</span>
-          </motion.div>
-
           <div ref={heroSlotRef} className="relative">
             <motion.div
               style={{

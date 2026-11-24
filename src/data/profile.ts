@@ -2,7 +2,7 @@ import type { ProfileInfo } from '../types/portfolio';
 
 export const PROFILE: ProfileInfo = {
   name: 'Musa Serkan Ergül',
-  tagline: 'Full-stack developer building resilient web apps and crisp desktop utilities.',
+  tagline: 'Full-stack developer building web apps and desktop tools.',
   availability: 'Available for select projects',
   location: 'Turkey (EN / TR)',
   email: 'mserkanergul@gmail.com',

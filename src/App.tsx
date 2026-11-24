@@ -85,7 +85,6 @@ function PortfolioShell() {
       <ScrollStage
         name={profile.name}
         tagline={profile.tagline}
-        availability={profile.availability}
         activeRouteLabel={activeRoute?.label}
         onResetScroll={handleResetScroll}
       >

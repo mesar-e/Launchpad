@@ -54,19 +54,9 @@ export function AboutSection() {
       </div>
 
       <aside
-        aria-label="At a Glance"
+        aria-label="Contact and links"
         className="flex h-fit flex-col gap-6 rounded-xl border border-[var(--border-dark-hairline)] bg-[var(--surface-dark-elevated)]/90 p-6"
       >
-        <div className="flex items-center justify-between border-b border-[var(--border-dark-hairline)] pb-4">
-          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--ink-dark-muted)]">
-            At a Glance
-          </span>
-          <span className="inline-flex items-center gap-2 rounded-full border border-[var(--border-dark-hairline)] px-3 py-1 text-[11px] font-medium text-[var(--ink-dark-primary)]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-emerald)]" aria-hidden="true" />
-            <span>{profile.availability}</span>
-          </span>
-        </div>
-
         <div className="space-y-1.5">
           <span className="block font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ink-dark-muted)]">
             Location

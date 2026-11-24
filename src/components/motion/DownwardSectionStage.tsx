@@ -45,10 +45,6 @@ export function DownwardSectionStage({
                 {route.label}
               </h2>
             </div>
-
-            <span className="text-xs text-[var(--ink-dark-muted)] sm:text-sm">
-              {route.subtitle}
-            </span>
           </header>
 
           <div className="pt-8">{children}</div>
